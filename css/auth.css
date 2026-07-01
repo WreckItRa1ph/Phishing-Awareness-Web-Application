@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+}
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 460px;
+    background: white;
+    padding: 38px;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.auth-logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #207c6d;
+    margin-bottom: 6px;
+}
+
+.auth-subtitle {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 22px;
+}
+
+.auth-card h1 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.auth-card p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.auth-form {
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.auth-form input:focus {
+    border-color: #207c6d;
+    outline: none;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    background: #207c6d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.auth-form button:hover {
+    background: #219784;
+}
+
+.auth-error {
+    background: #fdeaea;
+    color: #c0392b;
+    border-left: 4px solid #c0392b;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-radius: 4px;
+}
+
+.auth-message {
+    background: #eef8f6;
+    color: #207c6d;
+    border-left: 4px solid #207c6d;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-radius: 4px;
+}
+
+.auth-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: #207c6d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
