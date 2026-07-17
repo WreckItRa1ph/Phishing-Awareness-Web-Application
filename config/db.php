@@ -3,7 +3,7 @@
 $host = "localhost";
 $dbname = "phishaware_db";
 $username = "root";
-$password = "";
+$password = ""; 
 
 try {
 

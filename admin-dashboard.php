@@ -1,4 +1,4 @@
-<!DOCTYPE html> <!-- CONVERT PAGES TO PHP!!!! -->
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <div class="layout">
   <aside class="sidebar">
     <div class="logo">
-        <img src="images/logo.png" alt="PhishAware Logo"> <!-- Replace with non-placeholder logo -->
+        <img src="images/placeholder_logo_1.png" alt="PhishAware Logo"> <!-- Replace with non-placeholder logo -->
         <span> | PhishAware</span>
     </div>
     <nav> <!-- Navigation links, map all of these to their respective pages -->
