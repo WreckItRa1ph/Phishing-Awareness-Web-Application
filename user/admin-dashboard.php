@@ -45,7 +45,7 @@
             <div class="dropdown hidden" id="profile-dropdown">
                 <a href="#">My Profile</a>
                 <a href="#">Settings</a>
-                <a href="#">Log Out</a>
+                <a href="auth/logout.php">Log Out</a>
             </div>
         </div>
     </div>

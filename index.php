@@ -19,8 +19,8 @@
             <p>Select an option to continue. Don't have an account? Register today!</p>
 
             <div class="button-group">
-                <a href="login.php" class="login-btn">Login</a>
-                <a href="register.php" class="register-btn">Register</a>
+                <a href="auth/login.php" class="login-btn">Login</a>
+                <a href="auth/register.php" class="register-btn">Register</a>
             </div>
 
             <p class="login-footer">© 2026 PhishAware</p>

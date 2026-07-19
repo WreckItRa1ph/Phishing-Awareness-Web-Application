@@ -16,9 +16,9 @@
         <span> | PhishAware</span>
     </div>
     <nav> <!-- Navigation links, map all of these to their respective pages -->
-      <a href="#"><i class="fas fa-home"></i> | My Dashboard</a>
-      <a href="#"><i class="fas fa-graduation-cap"></i> | Training</a>
-      <a href="#"><i class="fas fa-chart-line"></i> | Results</a>
+      <a href="user/user-dashboard.php"><i class="fas fa-home"></i> | My Dashboard</a>
+      <a href="user/training.php"><i class="fas fa-graduation-cap"></i> | Training</a>
+      <a href="user/badges.php"><i class="fas fa-chart-line"></i> | Results</a>
       <a href="#"><i class="fas fa-trophy"></i> | Badges</a>
       <a href="#"><i class="fas fa-cog"></i> | Settings</a>
     </nav>
@@ -39,7 +39,7 @@
                     <div class="dropdown hidden" id="profile-dropdown">
                     <a href="#">My Profile</a>
                     <a href="#">Settings</a>
-                    <a href="#">Log Out</a>
+                    <a href="auth/logout.php">Log Out</a>
                     </div>
                 </div>
     </header>
