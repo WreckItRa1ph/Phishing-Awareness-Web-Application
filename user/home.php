@@ -1,5 +1,5 @@
 <?php
-
+//This page should no longer be needed. Remove after testing. The user should be redirected to either the user-dashboard.php or admin-dashboard.php page based on their role after logging in.
 session_start();
 
 if (!isset($_SESSION["user_id"])) {

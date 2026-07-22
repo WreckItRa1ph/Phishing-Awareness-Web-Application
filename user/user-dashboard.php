@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -37,8 +37,8 @@
             <div class="profile-menu">
                 <img src="images/default_pfp.jpg" alt="Profile" class="avatar" id="profile-btn">
                     <div class="dropdown hidden" id="profile-dropdown">
-                    <a href="#">My Profile</a>
-                    <a href="#">Settings</a>
+                    <a href="user/profile.php">My Profile</a>
+                    <a href="user/settings.php">Settings</a>
                     <a href="auth/logout.php">Log Out</a>
                     </div>
                 </div>
