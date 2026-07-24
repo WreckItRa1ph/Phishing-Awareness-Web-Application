@@ -38,16 +38,14 @@ $badgeCount = getBadgeCount($pdo, $_SESSION["user_id"]);
       <a href="training.php"><i class="fas fa-graduation-cap"></i> | Training</a>
       <a href="results.php"><i class="fas fa-chart-line"></i> | Results</a>
       <a href="badges.php"><i class="fas fa-trophy"></i> | Badges</a>
+      <a href="profile.php"><i class="fas fa-user"></i> | My Profile</a>
+      <a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> | Log Out</a>
     </nav>
   </aside>
   <div class="main">
     <header class="topbar">
       <div class="topbar-left">
         <span>Welcome, <?= htmlspecialchars($user["first_name"]) ?> <?= htmlspecialchars($user["last_name"]) ?></span>
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search your training, results, badges...">
-        </div>
       </div>
             <div class="topbar-right">
             <button id="notifications-btn"><i class="fas fa-bell"></i></button>

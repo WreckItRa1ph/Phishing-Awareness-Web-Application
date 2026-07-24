@@ -36,6 +36,8 @@ $user = getUserByID($pdo, $_SESSION["user_id"]);
       <a href="training.php"><i class="fas fa-graduation-cap"></i> | Assign Training</a>
       <a href="results.php"><i class="fas fa-chart-line"></i> | User Results</a>
       <a href="user-lookup.php"><i class="fas fa-users"></i> | Users</a>
+      <a href="profile.php"><i class="fas fa-user"></i> | My Profile</a>
+      <a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> | Log Out</a>
     </nav>
   </aside>
   <div class="main">
