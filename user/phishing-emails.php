@@ -30,7 +30,6 @@ $emails = getPhishingAssignments($pdo, (int) $_SESSION["user_id"]);
         <nav>
             <a href="user-dashboard.php"><i class="fas fa-home"></i> | My Dashboard</a>
             <a href="phishing-emails.php"><i class="fas fa-envelope"></i> | Phishing Inbox</a>
-            <a href="phishing-results.php"><i class="fas fa-chart-line"></i> | Phishing Results</a>
             <a href="training.php"><i class="fas fa-graduation-cap"></i> | Training</a>
             <a href="results.php"><i class="fas fa-chart-line"></i> | Results</a>
             <a href="badges.php"><i class="fas fa-trophy"></i> | Badges</a>
