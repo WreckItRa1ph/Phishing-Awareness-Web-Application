@@ -283,3 +283,381 @@ body {
     font-size: 0.85rem;
     color: #777;
 }
+
+
+.phishing-page-header {
+    margin-bottom: 20px;
+}
+
+.phishing-page-header h1 {
+    margin: 0 0 8px;
+    color: #222;
+}
+
+.phishing-page-header p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.phishing-inbox {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.137);
+    overflow: hidden;
+}
+
+.phishing-inbox-header {
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    gap: 15px;
+    padding: 14px 20px;
+    background: #207c6d;
+    color: white;
+    font-weight: bold;
+}
+
+.phishing-email-row {
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr;
+    gap: 15px;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.phishing-email-row:last-child {
+    border-bottom: none;
+}
+
+.phishing-email-row:hover {
+    background: #f3f4f6;
+}
+
+.phishing-email-row.unread {
+    font-weight: bold;
+    background: #f8fffd;
+    border-left: 5px solid #207c6d;
+}
+
+.phishing-email-row.read {
+    color: #666;
+}
+
+.phishing-sender {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.phishing-sender i {
+    color: #207c6d;
+}
+
+.phishing-subject {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.phishing-status {
+    text-align: right;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-new {
+    background: #e6f4f1;
+    color: #207c6d;
+}
+
+.status-opened {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-clicked {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.status-reported {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-ignored {
+    background: #eeeeee;
+    color: #555;
+}
+
+/* Individual simulated email */
+
+.email-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.137);
+    overflow: hidden;
+}
+
+.email-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid #ddd;
+    background: #fafafa;
+}
+
+.email-back-link {
+    color: #207c6d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.email-back-link:hover {
+    text-decoration: underline;
+}
+
+.email-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.email-header h2 {
+    margin: 0 0 15px;
+    color: #222;
+}
+
+.email-meta {
+    display: grid;
+    gap: 6px;
+    color: #555;
+    font-size: 14px;
+}
+
+.email-meta strong {
+    color: #222;
+}
+
+.email-body {
+    padding: 30px;
+    line-height: 1.7;
+    color: #333;
+    min-height: 250px;
+}
+
+.email-body p {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.simulated-email-link {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #f4d25e;
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.simulated-email-link:hover {
+    background: #e5c24f;
+}
+
+.email-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background: #fafafa;
+}
+
+.report-btn,
+.ignore-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.report-btn {
+    background: #207c6d;
+    color: white;
+}
+
+.report-btn:hover {
+    background: #176357;
+}
+
+.ignore-btn {
+    background: #777;
+    color: white;
+}
+
+.ignore-btn:hover {
+    background: #5f5f5f;
+}
+
+/* Training feedback shown after a simulated click */
+
+.phishing-feedback {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #fff3cd;
+    border-left: 5px solid #f4d25e;
+    color: #664d03;
+}
+
+.phishing-feedback h2 {
+    margin-top: 0;
+}
+
+.warning-signs {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.137);
+}
+
+.warning-signs li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Results tables */
+
+.results-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.137);
+    overflow-x: auto;
+}
+
+.results-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.137);
+}
+
+.summary-card h3 {
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 16px;
+}
+
+.summary-number {
+    margin: 0;
+    color: #207c6d;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results-table th,
+.results-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.results-table th {
+    background: #207c6d;
+    color: white;
+}
+
+.results-table tr:hover {
+    background: #f5f6fa;
+}
+
+.empty-state {
+    padding: 50px 20px;
+    text-align: center;
+    color: #666;
+}
+
+.empty-state i {
+    display: block;
+    margin-bottom: 15px;
+    color: #207c6d;
+    font-size: 45px;
+}
+
+/* Mobile responsiveness */
+
+@media screen and (max-width: 900px) {
+    .results-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phishing-inbox-header {
+        display: none;
+    }
+
+    .phishing-email-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .phishing-status {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .sidebar {
+        width: 190px;
+        padding: 15px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .results-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .email-body {
+        padding: 20px;
+    }
+
+    .email-actions {
+        flex-direction: column;
+    }
+
+    .report-btn,
+    .ignore-btn {
+        width: 100%;
+    }
+}
