@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once "../config/db.php";
@@ -7,131 +8,356 @@ require_once "../functions/phishing-functions.php";
 
 requireLoggedInUser();
 
-$assignmentId = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-if (!$assignmentId) {
+$userId = (int) $_SESSION["user_id"];
+
+$scenarioId = filter_input(
+    INPUT_GET,
+    "id",
+    FILTER_VALIDATE_INT
+);
+
+if (!$scenarioId) {
     http_response_code(400);
-    exit("Invalid simulation ID.");
+    exit("Invalid phishing scenario ID.");
 }
 
-$email = getPhishingAssignment($pdo, $assignmentId, (int) $_SESSION["user_id"]);
-if (!$email) {
+$scenario = getPhishingScenario(
+    $pdo,
+    $scenarioId
+);
+
+if ($scenario === false) {
     http_response_code(404);
-    exit("Simulation not found.");
+    exit("Phishing scenario not found.");
 }
 
-markPhishingEmailOpened($pdo, $assignmentId, (int) $_SESSION["user_id"]);
-$email = getPhishingAssignment($pdo, $assignmentId, (int) $_SESSION["user_id"]);
-$user = getUserByID($pdo, (int) $_SESSION["user_id"]);
+$choices = getScenarioChoices(
+    $pdo,
+    $scenarioId
+);
+
+$attemptId = getOrCreatePhishingAttempt(
+    $pdo,
+    $userId,
+    $scenarioId
+);
+
+$user = getUserByID(
+    $pdo,
+    $userId
+);
+
 $csrfToken = getCsrfToken();
+
+$senderName = !empty($scenario["sender_name"])
+    ? $scenario["sender_name"]
+    : "Unknown Sender";
+
+$senderEmail = !empty($scenario["sender_email"])
+    ? $scenario["sender_email"]
+    : "unknown@example.com";
+
+$subjectLine = !empty($scenario["subject_line"])
+    ? $scenario["subject_line"]
+    : "No subject";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($email["subject"]) ?> | PhishAware</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <?= htmlspecialchars($subjectLine) ?> | PhishAware
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 </head>
+
 <body>
+
 <div class="layout">
+
     <aside class="sidebar">
+
         <div class="logo">
-            <img src="../images/placeholder_logo_1.png" alt="PhishAware Logo">
+
+            <img
+                src="../images/placeholder_logo_1.png"
+                alt="PhishAware Logo"
+            >
+
             <span>| PhishAware</span>
+
         </div>
 
         <nav>
-            <a href="user-dashboard.php"><i class="fas fa-home"></i> | My Dashboard</a>
-            <a href="training.php"><i class="fas fa-graduation-cap"></i> | Training</a>
-            <a href="phishing-emails.php"><i class="fas fa-envelope"></i> | Phishing Simulation</a>
-            <a href="results.php"><i class="fas fa-chart-line"></i> | Results</a>
-            <a href="badges.php"><i class="fas fa-trophy"></i> | Badges</a>
-            <a href="profile.php"><i class="fas fa-user"></i> | My Profile</a>
-            <a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> | Log Out</a>
+
+            <a href="user-dashboard.php">
+                <i class="fas fa-home"></i>
+                | My Dashboard
+            </a>
+
+            <a href="training.php">
+                <i class="fas fa-graduation-cap"></i>
+                | Training
+            </a>
+
+            <a href="phishing-emails.php">
+                <i class="fas fa-envelope"></i>
+                | Phishing Simulation
+            </a>
+
+            <a href="results.php">
+                <i class="fas fa-chart-line"></i>
+                | Results
+            </a>
+
+            <a href="badges.php">
+                <i class="fas fa-trophy"></i>
+                | Badges
+            </a>
+
+            <a href="profile.php">
+                <i class="fas fa-user"></i>
+                | My Profile
+            </a>
+
+            <a href="../auth/logout.php">
+                <i class="fas fa-sign-out-alt"></i>
+                | Log Out
+            </a>
+
         </nav>
+
     </aside>
 
     <div class="main">
+
         <header class="topbar">
+
             <div class="topbar-left">
-                <span>Welcome, <?= htmlspecialchars($user["first_name"] . " " . $user["last_name"]) ?></span>
+
+                <span>
+                    Welcome,
+                    <?= htmlspecialchars(
+                        $user["first_name"] . " " . $user["last_name"]
+                    ) ?>
+                </span>
+
             </div>
 
             <div class="topbar-right">
+
                 <div class="profile-menu">
-                    <img src="../images/default_pfp.jpg" alt="Profile" class="avatar" id="profile-btn">
-                    <div class="dropdown hidden" id="profile-dropdown">
-                        <a href="profile.php">My Profile</a>
-                        <a href="../auth/logout.php">Log Out</a>
+
+                    <img
+                        src="../images/default_pfp.jpg"
+                        alt="Profile"
+                        class="avatar"
+                        id="profile-btn"
+                    >
+
+                    <div
+                        class="dropdown hidden"
+                        id="profile-dropdown"
+                    >
+
+                        <a href="profile.php">
+                            My Profile
+                        </a>
+
+                        <a href="../auth/logout.php">
+                            Log Out
+                        </a>
+
                     </div>
+
                 </div>
+
             </div>
+
         </header>
 
         <main class="content">
+
             <div class="phishing-page-header">
+
                 <h1>Simulated Email</h1>
-                <p>Review this message carefully and choose how you would respond.</p>
+
+                <p>
+                    Review the message carefully, then select the response
+                    you believe is safest.
+                </p>
+
             </div>
 
             <div class="email-container">
+
                 <div class="email-toolbar">
-                    <a class="email-back-link" href="phishing-emails.php">
-                        <i class="fas fa-arrow-left"></i> Back to inbox
+
+                    <a
+                        class="email-back-link"
+                        href="phishing-emails.php"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                        Back to inbox
                     </a>
-                    <span class="status-badge status-<?= htmlspecialchars($email["status"] === "unopened" ? "new" : $email["status"]) ?>">
-                        <?= htmlspecialchars($email["status"] === "unopened" ? "New" : ucfirst($email["status"])) ?>
+
+                    <span class="status-badge status-opened">
+                        In Progress
                     </span>
+
                 </div>
 
                 <div class="email-header">
-                    <h2><?= htmlspecialchars($email["subject"]) ?></h2>
+
+                    <h2>
+                        <?= htmlspecialchars($subjectLine) ?>
+                    </h2>
+
                     <div class="email-meta">
-                        <span><strong>From:</strong> <?= htmlspecialchars($email["sender_name"]) ?> &lt;<?= htmlspecialchars($email["sender_email"]) ?>&gt;</span>
-                        <span><strong>To:</strong> <?= htmlspecialchars($user["email"]) ?></span>
+
+                        <span>
+                            <strong>From:</strong>
+                            <?= htmlspecialchars($senderName) ?>
+                            &lt;<?= htmlspecialchars($senderEmail) ?>&gt;
+                        </span>
+
+                        <span>
+                            <strong>To:</strong>
+                            <?= htmlspecialchars($user["email"]) ?>
+                        </span>
+
+                        <span>
+                            <strong>Difficulty:</strong>
+                            <?= htmlspecialchars(
+                                ucfirst($scenario["difficulty"])
+                            ) ?>
+                        </span>
+
                     </div>
+
                 </div>
 
                 <div class="email-body">
-                    <?= $email["body_html"] ?>
 
-                    <a class="simulated-email-link" href="track-phishing-click.php?id=<?= (int) $email["assignment_id"] ?>">
-                        <?= htmlspecialchars($email["link_label"]) ?>
-                    </a>
+                    <?= nl2br(
+                        htmlspecialchars(
+                            $scenario["email_body"]
+                        )
+                    ) ?>
+
                 </div>
 
                 <div class="email-actions">
-                    <form method="POST" action="phishing-action.php">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
-                        <input type="hidden" name="assignment_id" value="<?= (int) $email["assignment_id"] ?>">
-                        <input type="hidden" name="action" value="reported">
-                        <button class="report-btn" type="submit">
-                            <i class="fas fa-flag"></i> Report Phishing
-                        </button>
-                    </form>
 
-                    <form method="POST" action="phishing-action.php">
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
-                        <input type="hidden" name="assignment_id" value="<?= (int) $email["assignment_id"] ?>">
-                        <input type="hidden" name="action" value="ignored">
-                        <button class="ignore-btn" type="submit">
-                            <i class="fas fa-trash"></i> Ignore / Delete
-                        </button>
-                    </form>
+                    <?php if (empty($choices)): ?>
+
+                        <div class="empty-state">
+
+                            <i class="fas fa-triangle-exclamation"></i>
+
+                            <h2>No response choices available</h2>
+
+                            <p>
+                                This scenario does not have any response
+                                choices in the database yet.
+                            </p>
+
+                        </div>
+
+                    <?php else: ?>
+
+                        <form
+                            method="POST"
+                            action="phishing-action.php"
+                            class="phishing-choice-form"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="<?= htmlspecialchars($csrfToken) ?>"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="attempt_id"
+                                value="<?= (int) $attemptId ?>"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="scenario_id"
+                                value="<?= (int) $scenarioId ?>"
+                            >
+
+                            <fieldset>
+
+                                <legend>
+                                    What would you do with this email?
+                                </legend>
+
+                                <?php foreach ($choices as $choice): ?>
+
+                                    <label class="phishing-choice">
+
+                                        <input
+                                            type="radio"
+                                            name="choice_id"
+                                            value="<?= (int) $choice["id"] ?>"
+                                            required
+                                        >
+
+                                        <span>
+                                            <?= htmlspecialchars(
+                                                $choice["choice_text"]
+                                            ) ?>
+                                        </span>
+
+                                    </label>
+
+                                <?php endforeach; ?>
+
+                            </fieldset>
+
+                            <button
+                                class="report-btn"
+                                type="submit"
+                            >
+                                <i class="fas fa-check"></i>
+                                Submit Response
+                            </button>
+
+                        </form>
+
+                    <?php endif; ?>
+
                 </div>
+
             </div>
 
-            <?php if (in_array($email["status"], ["clicked", "reported", "ignored"], true)): ?>
-                <div class="warning-signs" style="margin-top: 20px;">
-                    <h2>Warning signs in this email</h2>
-                    <p><?= htmlspecialchars($email["red_flags"]) ?></p>
-                </div>
-            <?php endif; ?>
         </main>
+
     </div>
+
 </div>
 
 <script src="../js/scripts.js"></script>
+
 </body>
 </html>
