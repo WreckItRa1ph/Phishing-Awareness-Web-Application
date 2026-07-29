@@ -57,7 +57,7 @@ $user = getUserByID($pdo, $_SESSION["user_id"]);
         </button>
 
         <div class="profile-menu">
-            <img src="../images/default_pfp.jpg" alt="Profile" class="avatar" id="profile-btn">
+            <i class="fas fa-user" alt="Profile" class="avatar" id="profile-btn"></i>
 
             <div class="dropdown hidden" id="profile-dropdown">
                 <a href="profile.php">My Profile</a>
@@ -67,22 +67,51 @@ $user = getUserByID($pdo, $_SESSION["user_id"]);
     </div>
 </header>
     <section class="content">
-      <div class="card-grid">
-  <div class="card">
-    <!-- Replace placeholder text with actual data, prefereably graphs or something visual. -->
-    <h3>Completion Rate</h3>
-    <p>0%</p>
-  </div>
-  <div class="card">
-    <h3>Assigned Trainings</h3>
-    <p>0</p>
-  </div>
-  <div class="card">
-    <h3>Last Score</h3>
-    <p>0%</p>
-  </div>
+      <div class="card-grid"> 
     </div>
-    </section>
+        <?php
+          // Admin metrics via helper functions
+          $totalUsers = getTotalUsers($pdo);
+          $adminUsers = getAdminUsersCount($pdo);
+          $recentSignups = getRecentSignupsCount($pdo, 30);
+          $assignedTrainings = getAssignedTrainingsCount($pdo);
+          $totalBadges = getTotalBadgesCount($pdo);
+          $avgScore = getAverageScore($pdo);
+          $avgScoreDisplay = $avgScore !== null ? round($avgScore, 1) . '%' : 'N/A';
+        ?>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>Total Users</h3>
+            <p><?= htmlspecialchars((string)$totalUsers) ?></p>
+          </div>
+
+          <div class="card">
+            <h3>Admin Users</h3>
+            <p><?= htmlspecialchars((string)$adminUsers) ?></p>
+          </div>
+
+          <div class="card">
+            <h3>Recent Signups</h3>
+            <p><?= htmlspecialchars((string)$recentSignups) ?></p>
+          </div>
+
+          <div class="card">
+            <h3>Training Modules Assigned to Users</h3>
+            <p><?= htmlspecialchars((string)$assignedTrainings) ?></p>
+          </div>
+
+          <div class="card">
+            <h3>Total Badges Earned By Users</h3>
+            <p><?= htmlspecialchars((string)$totalBadges) ?></p>
+          </div>
+
+          <div class="card">
+            <h3>Average Score</h3>
+            <p><?= htmlspecialchars((string)$avgScoreDisplay) ?></p>
+          </div>
+        </div>
+      </section>
   </div>
 </div>
 

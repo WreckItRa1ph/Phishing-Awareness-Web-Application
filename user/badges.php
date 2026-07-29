@@ -33,6 +33,7 @@ $user = getUserByID($pdo, $_SESSION["user_id"]);
     <nav> <!-- Navigation links, map all of these to their respective pages -->
       <a href="user-dashboard.php"><i class="fas fa-home"></i> | My Dashboard</a>
       <a href="training.php"><i class="fas fa-graduation-cap"></i> | Training</a>
+        <a href="phishing-emails.php"><i class="fas fa-envelope"></i> | Phishing Simulation</a>
       <a href="results.php"><i class="fas fa-chart-line"></i> | Results</a>
       <a href="badges.php"><i class="fas fa-trophy"></i> | Badges</a>
       <a href="profile.php"><i class="fas fa-user"></i> | My Profile</a>

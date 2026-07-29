@@ -61,14 +61,14 @@ $emails = getPhishingScenarios($pdo, $userId);
                 | My Dashboard
             </a>
 
-            <a href="phishing-emails.php">
-                <i class="fas fa-envelope"></i>
-                | Phishing Inbox
-            </a>
-
             <a href="training.php">
                 <i class="fas fa-graduation-cap"></i>
                 | Training
+            </a>
+
+            <a href="phishing-emails.php">
+                <i class="fas fa-envelope"></i>
+                | Phishing Inbox
             </a>
 
             <a href="results.php">

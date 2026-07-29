@@ -51,7 +51,7 @@ $badgeCount = getBadgeCount($pdo, $_SESSION["user_id"]);
             <div class="topbar-right">
             <button id="notifications-btn"><i class="fas fa-bell"></i></button>
             <div class="profile-menu">
-                <img src="../images/default_pfp.jpg" alt="Profile" class="avatar" id="profile-btn">
+                <i class="fas fa-user" alt="Profile" class="avatar" id="profile-btn"></i>
                     <div class="dropdown hidden" id="profile-dropdown">
                     <a href="profile.php">My Profile</a>
                     <a href="../auth/logout.php">Log Out</a>
@@ -61,42 +61,33 @@ $badgeCount = getBadgeCount($pdo, $_SESSION["user_id"]);
     <section class="content">
       <div class="card-grid"> <!-- All of these cards are for displaying user information and training progress, they are currently placeholders. ADD LOGIC TO POPULATE THEM WITH ACTUAL DATA!!! -->
   <div class="card">
+    <i class="fas fa-graduation-cap"></i>
     <h3>Assigned Trainings Completed</h3>
     <p><?= $assignedTraining["count"] ?></p>
   </div>
 
   <div class="card">
+    <i class="fas fa-chart-line"></i>
     <h3>Last Training Score</h3>
-    <p></p>
+    <p><?= $lastTrainingScore["score"] ?? "N/A" ?></p>
   </div>
 
   <div class="card">
+    <i class="fas fa-trophy"></i>
     <h3>Badges Earned</h3>
     <p><?= $badgeCount["count"] ?></p>
   </div>
 
   <div class="card">
+    <i class="fas fa-clock"></i>
     <h3>Next Assigned Training</h3>
-    <p></p>
+    <p><?= $nextAssignedTraining["title"] ?? "N/A" ?></p>
   </div>
-
-  <div class="card">
-    <h3>Not Assigned</h3>
-    <p></p>
-  </div>
-
-  <div class="card">
-    <h3>Not Assigned</h3>
-    <p></p>
-  </div>
-
   <div class="card wide-card">
     <h3>Your Training Overview</h3>
     <div class="chart-container">
     <canvas id="overviewChart"></canvas>
     </div>
-
-    
   </div>
     </div>
     </section>
